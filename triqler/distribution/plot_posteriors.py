@@ -12,7 +12,7 @@ import collections
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
-from scipy.stats import f_oneway, gamma, norm
+from scipy.stats import f_oneway, norm
 from scipy.optimize import curve_fit
 
 from ..triqler import __version__, __copyright__

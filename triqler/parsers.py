@@ -8,12 +8,11 @@ from __future__ import print_function
 
 import sys
 import numpy as np
-import math
 import csv
 import os
 import itertools
 import re
-from collections import defaultdict, namedtuple
+from collections import namedtuple
 
 csv.field_size_limit(2 ** 32)
 

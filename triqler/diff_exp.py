@@ -5,7 +5,7 @@ from __future__ import print_function
 import itertools
 
 import numpy as np
-from scipy.stats import f_oneway, kruskal
+from scipy.stats import f_oneway
 
 from . import parsers
 from . import qvality

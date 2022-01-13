@@ -3,7 +3,7 @@
 """setup.py: setuptools control for triqler."""
 
 import re
-from setuptools import setup, find_packages
+from setuptools import setup
 
 version = re.search(
     '^__version__\s*=\s*"(.*)"',

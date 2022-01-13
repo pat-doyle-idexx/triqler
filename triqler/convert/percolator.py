@@ -7,7 +7,6 @@ This script contains helper functions to parse percolator in and output files (t
 from __future__ import print_function
 
 import sys
-import csv
 import collections
 
 from .. import parsers

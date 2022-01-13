@@ -10,8 +10,8 @@ import os
 import sys
 
 import numpy as np
-import bisect
 from threadpoolctl import threadpool_limits
+
 
 tao = 2.0 / (1 + np.sqrt(5.0)) # inverse of golden section
 scaleAlpha = 1

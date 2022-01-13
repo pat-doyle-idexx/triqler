@@ -1,7 +1,6 @@
 from __future__ import print_function
 
 import sys
-import csv
 import bisect
 from collections import defaultdict
 

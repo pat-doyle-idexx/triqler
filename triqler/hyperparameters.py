@@ -2,13 +2,9 @@
 
 from __future__ import print_function
 
-import csv
-import sys
-import os
-import itertools
 
 import numpy as np
-from scipy.stats import hypsecant, gamma, norm, binom, t, cauchy
+from scipy.stats import hypsecant, gamma, norm, t, cauchy
 from scipy.optimize import curve_fit
 
 from . import parsers

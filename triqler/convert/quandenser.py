@@ -16,8 +16,6 @@ from __future__ import print_function
 
 import os
 import sys
-import numpy as np
-import collections
 
 from .. import parsers
 from ..triqler import __version__, __copyright__

@@ -12,7 +12,6 @@ import sys
 import os
 import collections
 import copy
-import csv
 import multiprocessing
 import warnings
 

@@ -17,7 +17,6 @@ from __future__ import print_function
 import os
 import sys
 import glob
-import numpy as np
 import collections
 
 from .. import parsers
