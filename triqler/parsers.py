@@ -15,6 +15,8 @@ import itertools
 import re
 from collections import defaultdict, namedtuple
 
+csv.field_size_limit(2 ** 32)
+
 
 def getTsvReader(filename):
   # Python 3
@@ -49,25 +51,25 @@ def parseFileList(inputFile):
       sampleList.append(row[2])
       if len(row) >= 4:
         fractionList.append(row[3])
-    
+
     if row[1] not in groupNames:
       groupNames.append(row[1])
       groups.append([])
     groups[groupNames.index(row[1])].append(fileIdx)
-  
+
   for groupIdx, groupName in enumerate(groupNames):
     groupNames[groupIdx] = str(groupIdx + 1) + ":" + groupName
-  
+
   if len(sampleList) == 0:
     sampleList = fileList
   elif len(sampleList) != len(fileList):
     sys.exit("Sample column was empty for some runs")
-  
+
   if len(fractionList) == 0:
     fractionList = [-1]*len(fileList)
   elif len(fractionList) != len(fileList):
     sys.exit("Fraction column was empty for some runs")
-  
+
   fileInfoList = [[x, getGroupLabel(idx, groups, groupNames), sampleList[idx], fractionList[idx]] for idx, x in enumerate(fileList)]
   return fileInfoList
 
@@ -127,7 +129,7 @@ def parseMappedPrecursorFile(mappedPrecursorFile):
     if " scan=" in row[1]:
       row[1] = row[1].split(" scan=")[1].split()[0]
     yield MappedPrecursor(row[0], int(row[1]), float(row[2]), int(row[3]), float(row[4]), float(row[5]))
-    
+
 ##########################
 ## Triqler input files  ##
 ##########################
@@ -140,11 +142,11 @@ class TriqlerInputRow(TriqlerInputRowBase):
   def toList(self):
     l = list(self)
     return l[:-1] + l[-1]
-  
+
   def toSimpleList(self):
     l = list(self)
     return l[:3] + l[6:-1] + l[-1]
-  
+
   def toString(self):
     return "\t".join(map(str, self.toList()))
 
@@ -180,7 +182,7 @@ def hasLinkPEPs(triqlerInputFile):
 def parsePosteriorFile(peptideQuantFile, refProtein = ""):
   reader = getTsvReader(peptideQuantFile)
   headers = next(reader)
-  
+
   for row in reader:
     protein = row[0]
     if len(refProtein) == 0 or refProtein in protein:
@@ -248,7 +250,7 @@ def printPeptideQuantRows(peptOutputFile, headers, peptideQuantRows):
   writer.writerow(getPeptideQuantRowHeaders(headers))
   for row in peptideQuantRows:
     writer.writerow(row.toList())
-    
+
 def filterAndGroupPeptides(peptQuantRows, peptFilter = lambda x : True):
   validPqr = lambda x : len(x.protein) == 1 and x.protein[0] != "NA" and x.combinedPEP < 1.0
   peptQuantRows = filter(lambda x : validPqr(x) and peptFilter(x), peptQuantRows)
@@ -286,7 +288,7 @@ def getQuantMatrix(quantRows, condenseChargeStates = True, retainBestChargeState
         quantRows.append(pqrs[0]._replace(qval = geomAvg([x.combinedPEP for x in pqrs])))
   else:
     quantMatrix = [[y if y > 0.0 else np.nan for y in x.quant] for x in quantRows]
-  
+
   quantRows, quantMatrix = zip(*[(x, np.array(y)) for x, y in sorted(zip(quantRows, quantMatrix), key = lambda x : x[0].combinedPEP)])
   quantRows = list(quantRows)
   quantMatrix = list(quantMatrix)
